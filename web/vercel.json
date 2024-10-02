@@ -1,11 +1,11 @@
 {
-  "routes": [
-    { "src": "/[^.]+", "dest": "/", "status": 200 }
-  ],
   "rewrites": [
     {
       "source": "/api/consulta",
       "destination": "http://104.131.30.232:3333/consulta"
     }
+  ],
+  "routes": [
+    { "src": "/[^.]+", "dest": "/", "status": 200 }
   ]
 }
