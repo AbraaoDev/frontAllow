@@ -18,15 +18,21 @@ interface ApplicantInputProps {
 export function ApplicantInput({ setApplicantData }: ApplicantInputProps) {
   const [cpf, setCpf] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit() {
     setLoading(true);
+    setErrorMessage("Este CPF não é reconhecido como requerente");
     try {
       const sanitizedCpf = cpf.replace(/\D/g, "");
       const response = await api.post("/consulta", { cpf: sanitizedCpf });
-      setApplicantData(response.data);
+      if (response.data) {
+        setApplicantData(response.data);
+      } else {
+        setErrorMessage("Este CPF não é reconhecido como requerente");
+      }
     } catch {
-      console.error("Erro de consulta");
+      setErrorMessage("Este CPF não é reconhecido como requerente");
     } finally {
       setLoading(false);
     }
@@ -56,6 +62,9 @@ export function ApplicantInput({ setApplicantData }: ApplicantInputProps) {
         {loading ? "Consultando..." : "Continuar"}
         {!loading && <ArrowRight className="size-5" />}
       </Button>
+      {errorMessage && (
+        <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
+      )}
     </div>
   );
 }
