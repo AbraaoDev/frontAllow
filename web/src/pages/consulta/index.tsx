@@ -47,11 +47,6 @@ export function CreateTripPage() {
           </span>
           .
         </p>
-
-        <div className="text-zinc-600 flex items-center justify-center gap-4 pt-8">
-          <span>Desenvolvido por</span>
-          <img src="abraaodev.svg" alt="Logo AbraãoDEV" width={150} />
-        </div>
       </div>
     </div>
   );
